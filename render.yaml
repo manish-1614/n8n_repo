@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: n8n
+    env: docker
+    plan: starter
+    autoDeploy: true
+    envVars:
+      - key: N8N_PORT
+        value: 5678
+      - key: N8N_HOST
+        value: 0.0.0.0
+      - key: N8N_PROTOCOL
+        value: https
+      - key: WEBHOOK_URL
+        value: https://n8n.onrender.com/   # replace with your actual Render URL
+      - key: GENERIC_TIMEZONE
+        value: Asia/Kolkata
+      - key: N8N_BASIC_AUTH_ACTIVE
+        value: true
+      - key: N8N_BASIC_AUTH_USER
+        value: admin
+      - key: N8N_BASIC_AUTH_PASSWORD
+        generateValue: true   # Render will generate a secure password
+
+      # --- Database Config ---
+      - key: DB_TYPE
+        value: postgresdb
+      - key: DB_POSTGRESDB_CONNECTION_STRING
+        value: postgres://neondb_owner:npg_msogM1b4FKDp@ep-old-truth-a4q3h1fr-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require
+
+    dockerfilePath: ./Dockerfile
